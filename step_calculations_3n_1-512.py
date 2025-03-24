@@ -44,6 +44,19 @@ def target(number, steps):
     return number
 
 
+def orbit_segment(number, target):
+    segment = [""]
+    while number != target:
+        segment.append(int(number))
+        if is_odd(number):
+            number = number*3+1
+        else:
+            number = number/2
+    segment.append(int(number))
+
+    return segment
+
+
 def step_calc(number, mult, t):
     sc = number * mult
     exp = 1
@@ -51,7 +64,9 @@ def step_calc(number, mult, t):
         exp += 1
 
     addend = Decimal(t * 2 ** exp) - sc
-    return [number, mult, addend, int(sc+addend), exp, int(t)]
+    row = [number, mult, addend, int(sc+addend), exp, int(t)]
+    row.extend(orbit_segment(number, t))
+    return row
 
 
 with open("./data/step_calculations_3n.csv", 'w', encoding='utf-8', newline='') as csvfile:
