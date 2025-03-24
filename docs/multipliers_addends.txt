@@ -21,8 +21,8 @@ n0.125+
 5.375
 
 3n+1
-p = prev_addend
-(1 + p + (p/2))
+p = prev_multiplier
+p + (p/2)
 
 1-step   3
 2-step   4.5
