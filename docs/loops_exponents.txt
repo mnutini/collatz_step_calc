@@ -1,0 +1,82 @@
+Using "step" to mean odd number to odd number - ex(in 3n, 5->16->8->4->2->1 is 1-step).
+
+n = odd number
+m = step multiplier
+a = addend
+e = exponent
+
+n = (n * m + a) / 2^e
+
+In 3n it's possible to calculate 3 to 1 in 2 calculations ...
+
+5 = (3 * 3 + 1) / 2^1,
+1 = (5 * 3 + 1) / 2^4
+
+It is also possible using a single multi-step calculation (2-step)...
+(3 * 4.5 + 2.5) / 2^4 = 1
+
+When n is a loop value, if the multiplier is a multiple of the number of loop steps the calculation result will be the same as the starting number.
+
+1 = (1 * 3 + 1) / 2^2     # 1-step calculation on 1-step loop
+1 = (1 * 4.5 + 3.5) / 2^3 # 2-step calculation on 1-step loop
+
+All 2-step calculations in 3n use the 4.5 multiplier but may have different addends and exponents. The addend depends on the number of divide by 2 steps between the n's. The exponent depends on the number of divides to the target n.
+
+The 5n systems has three loops. One 2-step loop and two 3-step loops. When doing multi-step calculations on the n values within the loop sets, the exponent value appears to be tied to the number of steps in the loop.
+
+Both n's in the 2-step loop resolve at 2^4.
+
+5n 2-step loop:
+(1) 6 (3) 16 8 4 2 (1)
+
+3 = (1 * 5 + 1) / 2^1
+1 = (3 * 5 + 1) / 2^4
+
+1 = (1 * 12.5 + 3.5)  / 2^4
+3 = (3 * 12.5 + 10.5) / 2^4
+
+All six of the n's in the two 3-step loops resolve at 2^5.
+
+5n 3-step loops:
+(13) 66 (33) 166 (83) 416 208 104 52 26 (13)
+
+13 = (13 * 31.25 + 9.75)  / 2^5
+33 = (33 * 31.25 + 24.75) / 2^5
+83 = (83 * 31.25 + 62.25) / 2^5
+
+
+(17) 86 (43) 216 108 54 (27) 136 68 34 (17)
+
+17 = (17 * 31.25 + 12.75) / 2^5
+27 = (27 * 31.25 + 20.25) / 2^5
+43 = (43 * 31.25 + 32.25) / 2^5
+
+Although not natural loops, iterating the 2-step loop twice replicates a 4-step loop that resolves at 2^8 
+
+2-step doubled to 4-step.
+1 = (1 * 195.3125 + 60.6875)  / 2^8
+3 = (3 * 195.3125 + 182.0625) / 2^8
+
+When tripling the 2-step loop and doubling the 3-step loops to mimic 6-step loops, all eight n's resolve at 2^9.
+
+1 = (1 * 488.28125 + 23.71875)  / 2^9
+3 = (3 * 488.28125 + 71.15625)  / 2^9
+
+13 = (13 * 488.28125 + 308.34375)  / 2^9
+33 = (33 * 488.28125 + 782.71875)  / 2^9
+83 = (83 * 488.28125 + 1968.65625) / 2^9
+
+17 = (17 * 488.28125 +  403.21875) / 2^9
+27 = (27 * 488.28125 +  640.40625) / 2^9
+43 = (43 * 488.28125 + 1019.90625) / 2^9
+
+Based on the thought that n values in loops are linked by the exponent level, a comparison can be made of non-looping n's by using a constant exponent in the equation and comparing the result to n. 
+
+Using n = 201 and e = 2^5, we can see that the output equals 196.625, 4.375 short of being a loop point. 
+
+5n 3-step example:
+y = (n * 31.25 + a) / 2^5
+196.625 = (201*31.25+10.75) / 2^5 
+201-196.625 = 4.375
+
+Using a hypothetical loop line if every n was a loop point [x=n, y=n], it's then possible to graph the equation output [x=n,y=(n*m+a)/2^e] for a given range against the line. 
