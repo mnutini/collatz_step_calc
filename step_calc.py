@@ -1,5 +1,6 @@
 import math
 import time
+import csv
 
 
 class StepCalc:
@@ -28,7 +29,7 @@ class StepCalc:
         end = step_calc_obj.orbit_numbers[-1]
         timestr = time.strftime(".%Y%m%d-%H%M%S") if with_datestamp else ""
 
-        return f"{multiplier}n_{steps}-step_{start}-{end}{timestr}.svg"
+        return f"{multiplier}n_{steps}-step_{start}-{end}{timestr}"
 
     @classmethod
     def multiplier_for_step(cls, base_multiplier, steps):
@@ -53,8 +54,15 @@ class StepCalc:
     def _log_str(self, start, target, multiplier, addend, sc):
         angle = self._angle_of_deviation(sc, start)
         self.log.append(
-            f"n:{start}\tt:{target}\tm:{multiplier}\ta:{addend} \tsc:{sc}\td:{start-sc}\tangle:{angle}"
-        )
+            [
+                start,
+                target,
+                multiplier,
+                addend,
+                sc,
+                start-sc,
+                angle
+            ])
 
     def _angle_of_deviation(self, a, b):
         c = math.sqrt(a**2 + b**2)
@@ -76,3 +84,11 @@ class StepCalc:
 
             self.x.append(start)
             self.y.append(sc)
+
+    def write_log(self, logfile):
+        with open(f"./log/{logfile}.log.csv", 'w', encoding='utf-8', newline='') as csvfile:
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(
+                ["number", "target", "multiplier", "addend", "total", "diff", "angle"])
+            for line in self.log:
+                writer.writerow(line)

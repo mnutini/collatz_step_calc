@@ -50,7 +50,6 @@ ax.set_ylabel('(n*m+a)/2^e')
 ax.set_title(chart_title)
 
 plt.legend()
-plt.savefig(f"images/{StepCalc.calc_filename(step_calc, False)}")
+plt.savefig(f"images/{StepCalc.calc_filename(step_calc, False)}.svg")
 
-for line in step_calc.log:
-    print(line)
+step_calc.write_log(f"{StepCalc.calc_filename(step_calc, False)}")
