@@ -75,7 +75,17 @@ Based on the thought that n values in loops are linked by the exponent level, a 
 Using n = 201 and e = 2^5, we can see that the output equals 196.625, 4.375 short of being a loop point. 
 
 5n 3-step example:
-y = (n * 31.25 + a) / 2^5
+
+Using 5n+1 and processing 201 three steps would result in the value 1573.
+
+(201 * 5 + 1) / 2^1 = 503
+(503 * 5 + 1) / 2^2 = 629
+(629 * 5 + 1) / 2^1 = 1573
+
+The 3-step calculation would use 2^2 to reach 1573.
+(201*31.25+10.75) / 2^2 = 1573
+
+To calculate 201 as if it were a 3-step loop value, the exponent is changed to 2^5 and the result becomes 196.625.
 196.625 = (201*31.25+10.75) / 2^5 
 201-196.625 = 4.375
 
